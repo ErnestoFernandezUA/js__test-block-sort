@@ -4,9 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+      }
+
+      .block {
+        height: 100px;
+        line-height: 100px;
+        font-size: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        border: 1px solid;
+        cursor: pointer;
+        user-select: none;
+      }
+    </style>
   </head>
   <body>
-    <script src="index.js"></script>
+    <script>
+      "use strict";
+
+      function getRandomColor() {
+          const r = Math.floor(Math.random() * 256);
+          const g = Math.floor(Math.random() * 256);
+          const b = Math.floor(Math.random() * 256);
+          return `rgb(${r},${g},${b})`;
+      }
+
+      let selectedDiv = null;
+
+      for (let i = 0; i < 100; i++) {
+          let div = document.createElement('div');
+          div.className = 'block';
+          div.textContent = 'div' + (i + 1);
+          div.style.order = i;
+          div.style.backgroundColor = getRandomColor();
+          div.dataset.defaultOrder = i;
+          document.body.appendChild(div);
+      }
+
+      document.body.addEventListener('click', function (event) {
+        if (event.target.className === 'block') {
+          let div = event.target;
+
+          if (parseInt(div.style.order) === -1) {
+            div.style.order = div.dataset.defaultOrder;
+          } else {
+            if (selectedDiv) {
+              selectedDiv.style.order = selectedDiv.dataset.defaultOrder;
+            }
+
+            div.style.order = -1;
+            selectedDiv = div; 
+          }
+        }
+      });
+    </script>
   </body> 
 </html>
