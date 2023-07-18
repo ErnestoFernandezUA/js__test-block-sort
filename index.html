@@ -48,19 +48,19 @@
       }
 
       document.body.addEventListener('click', function (event) {
-        if (event.target.className === 'block') {
-          let div = event.target;
+        if (event.target.className !== 'block') return;
 
-          if (parseInt(div.style.order) === -1) {
-            div.style.order = div.dataset.defaultOrder;
-          } else {
-            if (selectedDiv) {
-              selectedDiv.style.order = selectedDiv.dataset.defaultOrder;
-            }
+        let div = event.target;
 
-            div.style.order = -1;
-            selectedDiv = div; 
+        if (parseInt(div.style.order) === -1) {
+          div.style.order = div.dataset.defaultOrder;
+        } else {
+          if (selectedDiv) {
+            selectedDiv.style.order = selectedDiv.dataset.defaultOrder;
           }
+
+          div.style.order = -1;
+          selectedDiv = div; 
         }
       });
     </script>
