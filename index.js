@@ -23,7 +23,7 @@ document.body.addEventListener('click', function (event) {
   if (event.target.className === 'block') {
     let div = event.target;
 
-    if (parseInt(div.style.order) === 0) {
+    if (parseInt(div.style.order) === -1) {
       div.style.order = div.dataset.defaultOrder;
     } else {
       if (selectedDiv) {
